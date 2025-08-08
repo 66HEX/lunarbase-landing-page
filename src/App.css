@@ -1,0 +1,23 @@
+@import "tailwindcss";
+@import "./assets/fonts/SFPro/fonts.css";
+
+@theme {
+	--font-sans: "SF Pro", sans-serif;
+	--color-nocta-950: oklch(0.155 0 0);
+	--color-nocta-900: oklch(0.205 0 0);
+	--color-nocta-800: oklch(0.269 0 0);
+	--color-nocta-700: oklch(0.371 0 0);
+	--color-nocta-600: oklch(0.444 0.011 73.639);
+	--color-nocta-500: oklch(0.556 0 0);
+	--color-nocta-400: oklch(0.708 0 0);
+	--color-nocta-300: oklch(0.87 0 0);
+	--color-nocta-200: oklch(0.922 0 0);
+	--color-nocta-100: oklch(0.97 0 0);
+	--color-nocta-50: oklch(0.985 0 0);
+}
+
+@layer base {
+	body {
+		@apply overscroll-none;
+	}
+}

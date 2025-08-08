@@ -1,0 +1,25 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://lunarbase.dev/sitemap.xml
+
+# Crawl-delay for polite crawling
+Crawl-delay: 1
+
+# Disallow crawling of development and testing paths
+Disallow: /dev/
+Disallow: /test/
+Disallow: /.git/
+Disallow: /node_modules/
+
+# Allow crawling of important assets
+Allow: /assets/
+Allow: /images/
+Allow: /*.css
+Allow: /*.js
+Allow: /*.woff2
+Allow: /*.svg
+Allow: /*.png
+Allow: /*.jpg
+Allow: /*.webp

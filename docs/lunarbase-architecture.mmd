@@ -1,0 +1,143 @@
+graph TB
+    %% Client Layer
+    subgraph "Client Layer"
+        UI["React Admin Interface<br/>Nocta UI Components"]
+        Browser["Web Browser<br/>HTTPS/WSS"]
+    end
+
+    %% External Services
+    subgraph "External Services"
+        OAuth["OAuth Providers<br/>Google, GitHub"]
+        Email["Resend Email<br/>Service"]
+        S3["S3 File Storage<br/>Secure Upload"]
+        Prometheus["Prometheus<br/>Metrics"]
+    end
+
+    %% Application Layer
+    subgraph "Application Layer (Rust)"
+        subgraph "Web Framework"
+            Axum["Axum 0.8.4<br/>HTTP Server"]
+            Router["Route Handler<br/>API Endpoints"]
+            WS["WebSocket Handler<br/>Real-time Events"]
+        end
+
+        subgraph "Security Layer"
+            Auth["Authentication<br/>JWT + Argon2id"]
+            Authz["Authorization<br/>RBAC + Permissions"]
+            RateLimit["Rate Limiting<br/>1000 req/5min"]
+            CSRF["CSRF Protection<br/>SameSite Cookies"]
+        end
+
+        subgraph "Core Services"
+            CollectionSvc["Collection Management<br/>Dynamic Schema"]
+            QueryEngine["Query Engine<br/>Advanced Filtering"]
+            UserMgmt["User Management<br/>CRUD + Roles"]
+            EventSvc["Event Service<br/>WebSocket Events"]
+        end
+
+        subgraph "Data Access Layer"
+            Diesel["Diesel ORM<br/>Type-safe Queries"]
+            ConnPool["Connection Pool<br/>Efficient Management"]
+        end
+    end
+
+    %% Data Layer
+    subgraph "Data Layer"
+        SQLCipher["SQLCipher Database<br/>AES-256 Encryption"]
+        AuditLog["Audit Logs<br/>Operation Tracking"]
+        FileStore["File Storage<br/>Encrypted Files"]
+    end
+
+    %% Monitoring Layer
+    subgraph "Monitoring & Observability"
+        Metrics["Metrics Collection<br/>Performance Data"]
+        Logging["Activity Logging<br/>Audit Trails"]
+        Health["Health Checks<br/>System Status"]
+    end
+
+    %% Client Connections
+    Browser --> UI
+    UI --> |"HTTPS API Calls"| Axum
+    UI --> |"WebSocket Connection"| WS
+
+    %% External Service Connections
+    Auth --> OAuth
+    UserMgmt --> Email
+    CollectionSvc --> S3
+    Metrics --> Prometheus
+
+    %% Internal Flow
+    Axum --> Router
+    Router --> Auth
+    Auth --> Authz
+    Authz --> RateLimit
+    RateLimit --> CSRF
+    
+    Router --> CollectionSvc
+    Router --> QueryEngine
+    Router --> UserMgmt
+    
+    WS --> EventSvc
+    EventSvc --> Auth
+    
+    CollectionSvc --> Diesel
+    QueryEngine --> Diesel
+    UserMgmt --> Diesel
+    EventSvc --> Diesel
+    
+    Diesel --> ConnPool
+    ConnPool --> SQLCipher
+    
+    %% Data Storage
+    CollectionSvc --> FileStore
+    UserMgmt --> AuditLog
+    QueryEngine --> AuditLog
+    
+    %% Monitoring Connections
+    Axum --> Metrics
+    WS --> Metrics
+    Diesel --> Metrics
+    
+    Router --> Logging
+    EventSvc --> Logging
+    
+    Axum --> Health
+    SQLCipher --> Health
+
+    %% Security Flow
+    subgraph "Security Features"
+        Encryption["Data Encryption<br/>At Rest & Transit"]
+        InputVal["Input Validation<br/>SQL Injection Prevention"]
+        SessionMgmt["Session Management<br/>Token Blacklisting"]
+        BruteForce["Brute Force Protection<br/>Account Lockout"]
+    end
+
+    Auth --> Encryption
+    Router --> InputVal
+    Auth --> SessionMgmt
+    RateLimit --> BruteForce
+
+    %% Real-time Data Flow
+    subgraph "Real-time Architecture"
+        Subscription["Subscription Manager<br/>Client Subscriptions"]
+        EventFilter["Permission Filter<br/>Authorized Events"]
+        Broadcast["Event Broadcaster<br/>Multi-client Updates"]
+    end
+
+    EventSvc --> Subscription
+    Subscription --> EventFilter
+    EventFilter --> Broadcast
+    Broadcast --> WS
+
+    %% Technology Stack Labels
+    classDef rustTech fill:#dea584,stroke:#8b4513,stroke-width:2px,color:#000
+    classDef reactTech fill:#61dafb,stroke:#0088cc,stroke-width:2px,color:#000
+    classDef dbTech fill:#336791,stroke:#1a365d,stroke-width:2px,color:#fff
+    classDef securityTech fill:#ff6b6b,stroke:#c92a2a,stroke-width:2px,color:#fff
+    classDef externalTech fill:#51cf66,stroke:#2b8a3e,stroke-width:2px,color:#000
+
+    class Axum,Router,WS,Auth,Authz,RateLimit,CSRF,CollectionSvc,QueryEngine,UserMgmt,EventSvc,Diesel,ConnPool rustTech
+    class UI,Browser reactTech
+    class SQLCipher,AuditLog,FileStore dbTech
+    class Encryption,InputVal,SessionMgmt,BruteForce,Subscription,EventFilter,Broadcast securityTech
+    class OAuth,Email,S3,Prometheus externalTech
