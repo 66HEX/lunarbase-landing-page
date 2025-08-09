@@ -120,7 +120,7 @@ export default function AdminInterface() {
 						/>
 						<div className="bg-nocta-900 border border-nocta-50/10 rounded-md overflow-hidden">
 							<img
-								src="/1.webp"
+								src="/dashboard.webp"
 								alt="Dashboard Overview"
 								className="w-full h-full object-cover"
 							/>
@@ -148,7 +148,7 @@ export default function AdminInterface() {
 						/>
 						<div className="bg-nocta-900 border border-nocta-50/10 rounded-md overflow-hidden">
 							<img
-								src="/2.webp"
+								src="/websocket.webp"
 								alt="WebSocket Management"
 								className="w-full h-full object-cover"
 							/>
