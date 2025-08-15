@@ -1,3 +1,4 @@
+import { useLenis } from "@/components/ui/LenisContext";
 import { useGSAP } from "@gsap/react";
 import { DatabaseIcon, GithubLogoIcon } from "@phosphor-icons/react";
 import gsap from "gsap";
@@ -15,6 +16,11 @@ export default function Hero() {
 	const paraRef = useRef<HTMLParagraphElement | null>(null);
 	const ctaRef = useRef<HTMLDivElement | null>(null);
 	const badgeRef = useRef<HTMLDivElement | null>(null);
+	const { scrollTo: lenisScrollTo } = useLenis();
+
+	const handleScrollTo = (id: string) => {
+		lenisScrollTo(id);
+	};
 
 	useGSAP(
 		() => {
@@ -109,12 +115,26 @@ export default function Hero() {
 					flexibility. Real‑time operations through an intuitive admin
 					panel—where safety is the foundation and DX stays first‑class.
 				</p>
-				<div ref={ctaRef} className="mt-7 flex items-center gap-4">
+				<div 
+					ref={ctaRef} 
+					className="mt-7 flex items-center gap-4"
+				>
 					<Button variant="primary" asChild>
-						<a href="#get-started">Get Started</a>
+						<button 
+							className="cursor-pointer"
+							type="button"
+							onClick={() => handleScrollTo("#get-started")}
+						>
+							Get Started
+						</button>
 					</Button>
 					<Button variant="secondary" asChild>
-						<a href="#docs" className="flex items-center gap-2">
+						<a
+							href="https://github.com/66HEX/lunarbase"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="flex items-center gap-2"
+						>
 							<GithubLogoIcon size={16} />
 							GitHub
 						</a>
