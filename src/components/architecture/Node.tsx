@@ -12,8 +12,8 @@ export default function Node({
 	icon?: React.ReactNode;
 }) {
 	return (
-		<div className={`relative rounded-md bg-[#171717] $`}>
-			<div className="relative z-10 px-4 py-3 rounded-md backdrop-blur-md shadow-[0_1px_0_rgba(255,255,255,0.10)_inset,0_10px_30px_-18px_rgba(0,0,0,0.35)]">
+		<div className={`relative rounded-md bg-[#171717] backdrop-blur-md shadow-[0_1px_0_rgba(255,255,255,0.10)_inset,0_10px_30px_-18px_rgba(0,0,0,0.35)] $`}>
+			<div className="relative z-10 px-4 py-3 rounded-md ">
 				<div className="mb-1.5 flex items-center gap-2">
 					<div
 						className={`relative flex h-6 w-6 items-center justify-center rounded-sm text-nocta-50/70`}

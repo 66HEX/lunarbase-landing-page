@@ -18,7 +18,7 @@ export default function FeaturePin({ feature, className }: FeaturePinProps) {
 				aria-hidden
 				className="absolute left-1/2 top-0 h-6 w-px -translate-x-1/2 bg-nocta-50/12"
 			/>
-			<div className="relative mt-6 rounded-md border px-4 py-3 bg-[#171717] backdrop-blur-md shadow-[0_1px_0_rgba(255,255,255,0.10)_inset,0_10px_30px_-18px_rgba(0,0,0,0.35)]">
+			<div className="relative mt-6 rounded-md px-4 py-3 bg-[#171717] backdrop-blur-md shadow-[0_1px_0_rgba(255,255,255,0.10)_inset,0_10px_30px_-18px_rgba(0,0,0,0.35)]">
 				<div className="relative z-10">
 					<div className="mb-1.5 text-[13px] font-medium tracking-tight text-nocta-50/90">
 						{feature.title}
