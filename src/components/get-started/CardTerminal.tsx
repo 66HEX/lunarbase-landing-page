@@ -72,7 +72,7 @@ export default function CardTerminal({
 				<div className="flex items-center gap-2 text-nocta-50/85">
 					<TerminalIcon size={14} />
 					<span className="text-[12px] font-medium">{title}</span>
-					<span className="text-[11px] text-nocta-50/60">• {hint}</span>
+					<span className="text-[11px] text-nocta-50/60 hidden md:block">• {hint}</span>
 				</div>
 				<button
 					ref={btnRef}

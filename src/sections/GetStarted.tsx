@@ -3,7 +3,6 @@
 import { useGSAP } from "@gsap/react";
 import {
 	CheckCircleIcon,
-	CloudArrowUpIcon,
 	LightningIcon,
 } from "@phosphor-icons/react";
 import gsap from "gsap";
@@ -12,7 +11,6 @@ import { useRef } from "react";
 import Connector from "@/components/get-started/Connector";
 import Deck from "@/components/get-started/Deck";
 import DiagCard from "@/components/get-started/DiagCard";
-import MiniCode from "@/components/get-started/MiniCode";
 import TimelineStep from "@/components/get-started/TimelineStep";
 import { Chip } from "@/components/ui/Chip";
 
@@ -167,59 +165,47 @@ export default function GetStarted() {
 					/>
 
 					<div className="grid grid-cols-1 md:grid-cols-5 gap-6">
-						<aside className="relative col-span-2 md:border-r border-nocta-50/10 hidden md:block">
+						<aside className="relative col-span-2 md:border-r border-nocta-50/10">
 							<div>
-								<TimelineStep
-									index={1}
-									title="Clone and dependencies"
-									desc="Download repository and prepare environment."
-								>
-									<MiniCode
-										lines={[
-											"git clone https://github.com/66HEX/lunarbase.git",
-											"cd lunarbase",
-											"cargo build",
-											"cd admin-ui && npm install",
-										]}
-									/>
-								</TimelineStep>
+							<TimelineStep
+								index={1}
+								title="Clone repository"
+								desc="Download LunarBase from GitHub repository."
+							/>
 
-								<Connector />
+							<Connector />
 
-								<TimelineStep
-									index={2}
-									title="Backend (Axum)"
-									desc="Start API and WebSocket server on port 3000."
-								>
-									<MiniCode lines={["cargo run"]} />
-								</TimelineStep>
+							<TimelineStep
+								index={2}
+								title="Install dependencies"
+								desc="Set up Rust toolchain and required dependencies."
+							/>
 
-								<Connector />
+							<Connector />
 
-								<TimelineStep
-									index={3}
-									title="Admin Panel (React)"
-									desc="Launch admin interface on port 5173."
-								>
-									<MiniCode lines={["cd admin-ui", "npm run dev"]} />
-								</TimelineStep>
+							<TimelineStep
+								index={3}
+								title="Build application"
+								desc="Compile LunarBase with embedded admin interface."
+							/>
 
-								<Connector />
+							<Connector />
 
-								<TimelineStep
-									index={4}
-									title="S3 (optional)"
-									desc="LocalStack for file upload testing."
-								>
-									<MiniCode
-										lines={[
-											"./start-with-localstack.sh",
-											"# ...",
-											"./stop-localstack.sh",
-										]}
-									/>
-								</TimelineStep>
-							</div>
+							<TimelineStep
+								index={4}
+								title="Configure environment"
+								desc="Set up environment variables."
+							/>
+
+							<Connector />
+
+							<TimelineStep
+								index={5}
+								title="Start production server"
+								desc="Launch LunarBase with ACME SSL support."
+							/>
+
+						</div>
 						</aside>
 
 						<div className="relative col-span-3">
@@ -250,19 +236,15 @@ export default function GetStarted() {
 								<div className="flex flex-wrap items-center gap-2 text-[12px]">
 									<Chip
 										icon={<CheckCircleIcon size={12} />}
-										text="API: http://localhost:3000/api"
+										text="API: https://your-domain/api"
 									/>
 									<Chip
 										icon={<CheckCircleIcon size={12} />}
-										text="Docs: http://localhost:3000/docs"
+										text="Docs: https://your-domain/docs"
 									/>
 									<Chip
 										icon={<CheckCircleIcon size={12} />}
-										text="Panel: http://localhost:5173"
-									/>
-									<Chip
-										icon={<CloudArrowUpIcon size={12} />}
-										text="S3: LocalStack (optional)"
+										text="Panel: https://your-domain/admin"
 									/>
 									<div className="ml-auto"></div>
 								</div>

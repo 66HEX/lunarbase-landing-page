@@ -4,19 +4,28 @@ export default function Deck() {
 	return (
 		<div className="relative deck">
 			<CardTerminal
-				title="Backend"
-				hint="Axum + SQLCipher"
-				commands={["cargo run"]}
+				title="Build for Production"
+				hint="Compile with embedded admin UI"
+				commands={["cargo build --release"]}
 			/>
 			<CardTerminal
-				title="Admin Panel"
-				hint="React + Nocta UI"
-				commands={["cd admin-ui", "npm run dev"]}
+				title="Environment Config"
+				hint="Required production settings"
+				commands={["cp env.example .env", "# Set JWT_SECRET, SQLCIPHER_KEY etc."]}
 			/>
 			<CardTerminal
-				title="S3 (optional)"
-				hint="LocalStack"
-				commands={["./start-with-localstack.sh"]}
+				title="Production Server"
+				hint="Single binary with ACME support"
+				commands={[
+					"./lunarbase serve \\",
+					"   --acme \\",
+					"   --acme-domain your-domain.com \\",
+					"   --acme-domain www.your-domain.com \\",
+					"   --acme-email admin@your-domain.com \\",
+					"   --acme-production \\",
+					"   --acme-cache-dir /path/to/acme/cache \\",
+					"   --enable-redirect"
+				]}
 			/>
 		</div>
 	);
